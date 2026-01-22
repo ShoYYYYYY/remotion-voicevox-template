@@ -176,3 +176,20 @@ git clone https://github.com/nyanko3141592/remotion-voicevox-template.git my-vid
 cd my-video
 npm install
 ```
+
+---
+
+## キャラクター画像の入手
+
+公式の立ち絵素材を使用する場合：
+
+| キャラクター | 入手先 |
+|-------------|--------|
+| ずんだもん | https://zunko.jp/con_illust.html |
+| 四国めたん | https://zunko.jp/con_illust.html |
+
+ニコニ・コモンズで「ずんだもん 立ち絵」「四国めたん 立ち絵」で検索も可能。
+
+**注意**: 各素材の利用規約を確認してください。
+
+テンプレートにはシンプルなプレースホルダー画像が含まれています。
