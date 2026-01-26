@@ -117,6 +117,7 @@ export const SceneVisuals: React.FC<SceneVisualsProps> = ({
             color: visual.color || COLORS.text,
             textAlign: "center",
             lineHeight: 1.4,
+            whiteSpace: "pre-wrap",
           }}
         >
           {visual.text}
