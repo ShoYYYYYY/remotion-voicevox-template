@@ -74,7 +74,7 @@ export const scriptData: ScriptLine[] = [
       "animation": "zoomIn"
     },
     "voiceFile": "01_zundamon.wav",
-    "durationInFrames": 60
+    "durationInFrames": 53
   },
   {
     "id": 2,
@@ -83,7 +83,7 @@ export const scriptData: ScriptLine[] = [
     "scene": 1,
     "pauseAfter": 15,
     "voiceFile": "02_metan.wav",
-    "durationInFrames": 60
+    "durationInFrames": 44
   },
   {
     "id": 3,
@@ -92,7 +92,7 @@ export const scriptData: ScriptLine[] = [
     "scene": 1,
     "pauseAfter": 10,
     "voiceFile": "03_zundamon.wav",
-    "durationInFrames": 60
+    "durationInFrames": 123
   },
   {
     "id": 4,
@@ -101,7 +101,7 @@ export const scriptData: ScriptLine[] = [
     "scene": 1,
     "pauseAfter": 30,
     "voiceFile": "04_metan.wav",
-    "durationInFrames": 60
+    "durationInFrames": 31
   }
 ];
 

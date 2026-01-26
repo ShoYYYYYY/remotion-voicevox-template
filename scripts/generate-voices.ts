@@ -140,7 +140,7 @@ async function main() {
     // 簡易パース（本番ではAST解析を使用）
     const dataStr = scriptDataMatch[1];
     const lineMatches = dataStr.matchAll(
-      /\{\s*id:\s*(\d+),\s*character:\s*"([^"]+)",\s*text:\s*"([^"]+)"[^}]*voiceFile:\s*"([^"]+)"/g
+      /\{\s*"?id"?:\s*(\d+),\s*"?character"?:\s*"([^"]+)",\s*"?text"?:\s*"([^"]+)"[\s\S]*?"?voiceFile"?:\s*"([^"]+)"/g
     );
 
     for (const match of lineMatches) {
@@ -155,7 +155,8 @@ async function main() {
 
   console.log(`${scriptData.length}件のセリフを処理します...`);
 
-  const durations: { id: number; file: string; duration: number; frames: number }[] = [];
+  const durationsArray: { id: number; file: string; duration: number; frames: number }[] = [];
+  const durationsMap: Record<string, number> = {};
 
   for (const line of scriptData) {
     const speakerId = characters.get(line.character);
@@ -188,12 +189,13 @@ async function main() {
       const duration = getWavDuration(outputPath);
       const frames = Math.ceil(duration * fps * playbackRate);
 
-      durations.push({
+      durationsArray.push({
         id: line.id,
         file: line.voiceFile,
         duration,
         frames,
       });
+      durationsMap[line.voiceFile] = frames;
 
       console.log(`  -> ${duration.toFixed(2)}s, ${frames} frames`);
 
@@ -202,14 +204,14 @@ async function main() {
     }
   }
 
-  // 結果をJSONで保存
+  // 結果をJSONで保存（sync-script.tsが期待するオブジェクト形式）
   const resultPath = path.join(OUTPUT_DIR, "durations.json");
-  fs.writeFileSync(resultPath, JSON.stringify(durations, null, 2));
+  fs.writeFileSync(resultPath, JSON.stringify(durationsMap, null, 2));
   console.log(`\nDuration data saved to: ${resultPath}`);
 
   // script.ts更新用のコードを出力
   console.log("\n=== script.ts更新用 ===");
-  for (const d of durations) {
+  for (const d of durationsArray) {
     console.log(`ID ${d.id}: durationInFrames: ${d.frames}, // ${d.duration.toFixed(2)}s`);
   }
 }
