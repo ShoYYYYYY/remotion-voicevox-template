@@ -91,8 +91,10 @@ async function synthesize(
 // WAVファイルの長さを取得（秒）
 function getWavDuration(filePath: string): number {
   try {
+    // Windowsパスのバックスラッシュをエスケープ
+    const escapedPath = filePath.replace(/\\/g, '\\\\');
     const result = execSync(
-      `python3 -c "import wave; w=wave.open('${filePath}','r'); print(w.getnframes()/w.getframerate())"`,
+      `python3 -c "import wave; w=wave.open('${escapedPath}','r'); print(w.getnframes()/w.getframerate())"`,
       { encoding: "utf-8" }
     );
     return parseFloat(result.trim());
